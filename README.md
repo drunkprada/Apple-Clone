@@ -1,2 +1,3 @@
 # Apple-Clone
-Basic clone of Apple's landing page for CodeChef screenings
+Basic clone of Apple's landing page for CodeChef screening
+-Sahana
