@@ -8,37 +8,37 @@ let currentSlide = 0;
 let isPlaying = false;
 let interval;
 
-
+// Function to move to a specific slide
 function goToSlide(slideIndex) {
     currentSlide = slideIndex;
     const offset = -currentSlide * 100;
     mainCarousel.style.transform = `translateX(${offset}%)`;
     secondaryCarousel.style.transform = `translateX(${offset}%)`;
 
-    
+    // Update active dot
     dots.forEach((dot, index) => {
         dot.classList.toggle("active", index === currentSlide);
     });
 }
 
-
+// Function to start the carousel flow
 function startCarousel() {
     interval = setInterval(() => {
-        currentSlide = (currentSlide + 1) % 5; 
+        currentSlide = (currentSlide + 1) % 5; // Loop back to 0 after slide 5
         goToSlide(currentSlide);
-    }, 3000); 
+    }, 3000); // Adjust slide transition speed (3 seconds)
     isPlaying = true;
-    playPauseButton.textContent = "❚❚"; 
+    playPauseButton.textContent = "❚❚"; // Pause icon
 }
 
-
+// Function to pause the carousel flow
 function pauseCarousel() {
     clearInterval(interval);
     isPlaying = false;
-    playPauseButton.textContent = "►"; 
+    playPauseButton.textContent = "►"; // Play icon
 }
 
-
+// Event listener for play/pause button
 playPauseButton.addEventListener("click", () => {
     if (isPlaying) {
         pauseCarousel();
@@ -47,7 +47,7 @@ playPauseButton.addEventListener("click", () => {
     }
 });
 
-
+// Event listeners for navigation dots
 dots.forEach((dot, index) => {
     dot.addEventListener("click", () => {
         pauseCarousel();
@@ -55,35 +55,5 @@ dots.forEach((dot, index) => {
     });
 });
 
-
+// Initialize the first slide
 goToSlide(0);
-
-
-const secondaryCarouselInner = document.querySelector(".secondary-carousel .carousel-inner");
-let secondaryCurrentSlide = 0;
-const secondarySlideWidth = 150; 
-const secondarySlidesPerView = 3; 
-
-
-function moveSecondaryCarousel() {
-    secondaryCurrentSlide = (secondaryCurrentSlide + 1) % (secondaryCarouselInner.children.length - secondarySlidesPerView + 1);
-    const offset = -secondaryCurrentSlide * secondarySlideWidth;
-    secondaryCarouselInner.style.transform = `translateX(${offset}px)`;
-}
-
-
-function syncSecondaryCarousel() {
-    moveSecondaryCarousel();
-}
-
-playPauseButton.addEventListener("click", () => {
-    if (isPlaying) {
-        pauseCarousel();
-    } else {
-        startCarousel();
-    }
-    syncSecondaryCarousel(); 
-});
-
-
-syncSecondaryCarousel();
