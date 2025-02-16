@@ -385,137 +385,124 @@ nav ul li a:hover {
     background-image: url('card.png');
 }
 
-/* General Styles */
-body {
-    margin: 0;
-    font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #1d1d1f;
-}
 
-/* General Styles */
-body {
-    margin: 0;
-    font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #1d1d1f;
-}
 
-/* Carousel Section */
-.carousel-section {
+/* Main Carousel Styles */
+.main-carousel-container {
+    width: 1200px;
+    margin: 0 auto;
     position: relative;
-    width: 100%;
     overflow: hidden;
 }
 
-.carousel {
+.main-carousel-inner {
     display: flex;
+    gap: 20px;
     transition: transform 0.5s ease;
 }
 
-.carousel-inner {
-    display: flex;
-    width: 100%;
+.main-slide {
+    min-width: 990px;
+    height: 367.789px;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-right: -198px; 
 }
 
-.carousel-slide {
-    box-sizing: border-box;
-    text-align: center;
+.main-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-overlay {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    color: white;
+}
+
+/* Secondary Carousel Styles */
+.secondary-carousel-container {
+    width: 1350px; /* 3 cards * 417px + gaps */
+    margin: 40px auto;
+    overflow: hidden;
+}
+
+.secondary-carousel-inner {
+    display: grid;
+    grid-template-columns: repeat(6, 417px);
+    gap: 20px;
+    transition: transform 0.5s ease;
+}
+
+.secondary-card {
+    width: 417px;
+    height: 263px;
+    border-radius: 12px;
+    overflow: hidden;
     position: relative;
 }
 
-.carousel-slide img {
+.secondary-card:hover .card-overlay {
+    opacity: 1;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensure images fill the container */
+    background: rgba(0,0,0,0.5);
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
 }
 
-.carousel-slide p {
-    font-size: 17px;
-    margin: 10px 0;
-    color: rgb(41, 151, 255);
-    text-align: left;
-    padding-left: 20px;
-}
-
-/* First Carousel Sizing */
-.main-carousel .carousel-slide {
-    width: 990px;
-    height: 367.789px;
-    background: radial-gradient(100% 33% at left bottom, rgba(0, 0, 0, 0.5) 0%, rgba(255, 255, 255, 0));
-    margin-right: 20px; /* Spacing between slides */
-}
-
-/* Navigation Dots */
-.carousel-dots {
-    text-align: center;
-    margin: 20px 0;
-}
-
-.dot {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin: 0 8px;
-    background-color: #bbb;
-    border-radius: 50%;
+.play-button {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0,0,0,0.7);
+    padding: 8px 20px;
+    border-radius: 20px;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-.dot.active {
-    background-color: #0071e3;
-}
-
-/* Second Carousel Sizing */
-.secondary-carousel {
-    width: 100%;
-    overflow: hidden;
+/* Navigation Controls */
+.dots-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
     margin-top: 20px;
 }
 
-.secondary-carousel .carousel-inner {
-    display: flex;
-    transition: transform 0.5s ease;
-}
-
-.secondary-carousel .carousel-slide {
-    width: 417px;
-    height: 263px;
-    margin-right: 10px; /* Spacing between cards */
-    text-align: center;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.secondary-carousel .carousel-slide img {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px 10px 0 0;
-}
-
-.secondary-carousel .carousel-slide p {
-    font-size: 14px;
-    margin: 10px 0;
-    color: #1d1d1f;
-}
-
-/* Play Button */
-.carousel-arrow {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
+.dot {
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    font-size: 18px;
-    transition: background-color 0.3s;
+    background: #ccc;
+    cursor: pointer;
 }
 
-.carousel-arrow:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+.dot.active {
+    background: #0071e3;
+}
+
+.play-pause {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 18px;
 }
 /* Footer Section */
 .footer-section {

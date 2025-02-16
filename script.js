@@ -1,59 +1,55 @@
-// Carousel Functionality
-const mainCarousel = document.querySelector(".main-carousel .carousel-inner");
-const secondaryCarousel = document.querySelector(".secondary-carousel .carousel-inner");
-const dots = document.querySelectorAll(".dot");
-const playPauseButton = document.querySelector(".carousel-arrow.play-pause");
 
 let currentSlide = 0;
 let isPlaying = false;
-let interval;
+let intervalId;
 
-// Function to move to a specific slide
-function goToSlide(slideIndex) {
-    currentSlide = slideIndex;
-    const offset = -currentSlide * 100;
-    mainCarousel.style.transform = `translateX(${offset}%)`;
-    secondaryCarousel.style.transform = `translateX(${offset}%)`;
+const mainCarousel = document.querySelector('.main-carousel-inner');
+const dots = document.querySelectorAll('.dot');
 
-    // Update active dot
-    dots.forEach((dot, index) => {
-        dot.classList.toggle("active", index === currentSlide);
-    });
+
+const secondaryCarousel = document.querySelector('.secondary-carousel-inner');
+
+function moveCarousels() {
+    
+    mainCarousel.style.transform = `translateX(-${currentSlide * 1010}px)`;
+    
+    
+    secondaryCarousel.style.transform = `translateX(-${currentSlide * 437 * 3}px)`;
+    
+    
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[currentSlide].classList.add('active');
 }
 
-// Function to start the carousel flow
-function startCarousel() {
-    interval = setInterval(() => {
-        currentSlide = (currentSlide + 1) % 5; // Loop back to 0 after slide 5
-        goToSlide(currentSlide);
-    }, 3000); // Adjust slide transition speed (3 seconds)
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % 10;
+    moveCarousels();
+}
+
+function startAutoPlay() {
+    intervalId = setInterval(nextSlide, 3000);
+    document.querySelector('.play-pause').textContent = '⏸︎';
     isPlaying = true;
-    playPauseButton.textContent = "❚❚"; // Pause icon
 }
 
-// Function to pause the carousel flow
-function pauseCarousel() {
-    clearInterval(interval);
+function stopAutoPlay() {
+    clearInterval(intervalId);
+    document.querySelector('.play-pause').textContent = '▶︎';
     isPlaying = false;
-    playPauseButton.textContent = "►"; // Play icon
 }
 
-// Event listener for play/pause button
-playPauseButton.addEventListener("click", () => {
-    if (isPlaying) {
-        pauseCarousel();
-    } else {
-        startCarousel();
-    }
+
+document.querySelector('.play-pause').addEventListener('click', () => {
+    isPlaying ? stopAutoPlay() : startAutoPlay();
 });
 
-// Event listeners for navigation dots
 dots.forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-        pauseCarousel();
-        goToSlide(index);
+    dot.addEventListener('click', () => {
+        currentSlide = index;
+        moveCarousels();
+        if(isPlaying) stopAutoPlay();
     });
 });
 
-// Initialize the first slide
-goToSlide(0);
+
+moveCarousels();
